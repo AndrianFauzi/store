@@ -1,7 +1,21 @@
 package main
 
-import "github.com/AndrianFauzi/store/app"
+import (
+	"store/controllers"
+	"store/initializers"
+
+	"github.com/gin-gonic/gin"
+)
+
+func init() {
+	initializers.LoadEnvVariables()
+	initializers.ConnectionDB()
+}
 
 func main() {
-	app.Run()
+
+	r := gin.Default()
+
+	r.POST("/", controllers.PostCreate)
+	r.Run() 
 }
